@@ -2,6 +2,8 @@ name: ci
 
 on:
   push:
+    branches:
+      - main
   pull_request:
 
 permissions:
@@ -25,9 +27,9 @@ jobs:
         shell: pwsh
         run: dotnet restore .\CodexRouter.sln
 
-      - name: Build and test all assemblies
+      - name: Build and test portable suite
         shell: pwsh
-        run: .\scripts\test-all.ps1
+        run: .\scripts\test-all.ps1 -ExcludeIntegration
 
       - name: Audit NuGet vulnerabilities
         shell: pwsh

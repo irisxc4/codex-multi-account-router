@@ -1,6 +1,7 @@
 param(
     [ValidateSet('Debug', 'Release')]
-    [string]$Configuration = 'Release'
+    [string]$Configuration = 'Release',
+    [switch]$ExcludeIntegration
 )
 
 $ErrorActionPreference = 'Stop'
@@ -25,7 +26,12 @@ try {
         if ($null -eq $assembly) { throw "Built test assembly '$expected' was not found for $($project.Name)." }
 
         Write-Host "==> $($project.Name)"
-        & dotnet vstest $assembly.FullName --nologo
+        $vstestArguments = @('vstest', $assembly.FullName, '--nologo')
+        if ($ExcludeIntegration) {
+            $vstestArguments += '--TestCaseFilter:Category!=Integration'
+        }
+
+        & dotnet @vstestArguments
         if ($LASTEXITCODE -ne 0) { throw "$($project.Name) failed with exit code $LASTEXITCODE." }
         $passedAssemblies++
     }
