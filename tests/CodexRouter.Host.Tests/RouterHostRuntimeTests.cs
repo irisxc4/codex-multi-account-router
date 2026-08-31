@@ -105,6 +105,7 @@ public sealed class RouterHostRuntimeTests
     }
 
     [Fact]
+    [Trait("Category", "Integration")]
     public async Task Desktop_global_options_and_analytics_flag_route_to_router_stdio()
     {
         var root = NewRoot();
