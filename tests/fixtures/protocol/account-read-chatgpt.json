@@ -1,0 +1,13 @@
+{
+  "id": 1,
+  "result": {
+    "account": {
+      "type": "chatgpt",
+      "email": "router@example.com",
+      "planType": "plus",
+      "futureField": { "ignored": true }
+    },
+    "requiresOpenaiAuth": true,
+    "unknownTopLevel": 123
+  }
+}

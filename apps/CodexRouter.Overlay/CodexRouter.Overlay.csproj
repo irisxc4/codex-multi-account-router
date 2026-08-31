@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>CodexRouterOverlay</AssemblyName>
+    <RootNamespace>CodexRouter.Overlay</RootNamespace>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <SelfContained>false</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\CodexRouter.Control\CodexRouter.Control.csproj" />
+    <ProjectReference Include="..\..\src\CodexRouter.Host\CodexRouter.Host.csproj" />
+    <ProjectReference Include="..\..\src\CodexRouter.Storage\CodexRouter.Storage.csproj" />
+    <ProjectReference Include="..\..\src\CodexRouter.Workers\CodexRouter.Workers.csproj" />
+    <ProjectReference Include="..\..\src\CodexRouter.Accounts\CodexRouter.Accounts.csproj" />
+    <ProjectReference Include="..\..\src\CodexRouter.Protocol\CodexRouter.Protocol.csproj" />
+  </ItemGroup>
+</Project>

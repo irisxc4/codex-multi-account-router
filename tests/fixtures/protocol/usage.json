@@ -1,0 +1,19 @@
+{
+  "id": 9,
+  "result": {
+    "summary": {
+      "lifetimeTokens": 72700,
+      "peakDailyTokens": 18100,
+      "longestRunningTurnSec": 812,
+      "currentStreakDays": 4,
+      "longestStreakDays": 11,
+      "futureMetric": 999
+    },
+    "dailyUsageBuckets": [
+      { "startDate": "2026-08-15", "tokens": 10200 },
+      { "startDate": "2026-08-16", "tokens": 14300 },
+      { "startDate": "not-a-date", "tokens": 1 }
+    ],
+    "futureField": true
+  }
+}

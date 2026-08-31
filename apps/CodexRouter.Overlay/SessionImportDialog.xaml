@@ -1,0 +1,81 @@
+<Window x:Class="CodexRouter.Overlay.SessionImportDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:CodexRouter.Overlay"
+        Title="{x:Static local:UiText.SessionImportTitle}"
+        Width="430" Height="402"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="#17191E"
+        Foreground="#E7E9ED"
+        ShowInTaskbar="False">
+    <Grid Margin="18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="{x:Static local:UiText.SessionImportTitle}"
+                   FontSize="16" FontWeight="SemiBold" />
+        <TextBlock Grid.Row="1" Text="{x:Static local:UiText.SessionImportDescription}"
+                   FontSize="10.5" Foreground="#A4A9B2" TextWrapping="Wrap"
+                   Margin="0,6,0,12" />
+
+        <Border Grid.Row="2" Background="#20242A" BorderBrush="#363D47" BorderThickness="1"
+                CornerRadius="7" Padding="11" Margin="0,0,0,10">
+            <StackPanel>
+                <TextBlock Text="{x:Static local:UiText.SessionImportStepTitle}" FontSize="11.5"
+                           FontWeight="SemiBold" Foreground="#E1E4E9" />
+                <TextBlock Text="{x:Static local:UiText.SessionImportStepDescription}" FontSize="9.7"
+                           Foreground="#969CA6" TextWrapping="Wrap" Margin="0,4,0,9" />
+                <StackPanel Orientation="Horizontal">
+                    <Button Click="OnOpenSessionPageClick" Content="{x:Static local:UiText.OpenSessionPage}"
+                            Padding="10,6" MinWidth="128" Background="#2A2E35"
+                            BorderBrush="#4B5360" Foreground="#EEF0F3" />
+                    <Button Click="OnReadClipboardClick" Content="{x:Static local:UiText.ReadSessionClipboard}"
+                            Padding="10,6" MinWidth="128" Margin="8,0,0,0" Background="#2A2E35"
+                            BorderBrush="#4B5360" Foreground="#EEF0F3" />
+                </StackPanel>
+                <TextBlock x:Name="SessionStateText" Text="{x:Static local:UiText.SessionNotLoaded}"
+                           FontSize="10" Foreground="#B3B8C1" Margin="0,9,0,0" TextWrapping="Wrap" />
+            </StackPanel>
+        </Border>
+
+        <Border x:Name="ProxyPanel" Grid.Row="3" Visibility="Collapsed"
+                Background="#20242A" BorderBrush="#3D4652" BorderThickness="1"
+                CornerRadius="7" Padding="10" Margin="0,0,0,10">
+            <StackPanel>
+                <TextBlock Text="{x:Static local:UiText.LoginNetworkRouteTitle}" FontSize="10.5"
+                           FontWeight="SemiBold" Foreground="#D8DBE1" Margin="0,0,0,7" />
+                <RadioButton x:Name="DirectRouteRadioButton" GroupName="SessionImportRoute"
+                             Checked="OnRouteSelected" Foreground="#D6D9DF" Margin="0,0,0,5"
+                             Content="{x:Static local:UiText.DirectLoginRoute}" />
+                <RadioButton x:Name="ProxyRouteRadioButton" GroupName="SessionImportRoute"
+                             Checked="OnRouteSelected" Foreground="#E7E9ED">
+                    <TextBlock x:Name="ProxyCandidateText" FontSize="11" FontWeight="SemiBold" />
+                </RadioButton>
+                <TextBlock Text="{x:Static local:UiText.SessionProxyDescription}" FontSize="9.5"
+                           Foreground="#969CA6" TextWrapping="Wrap" Margin="22,5,0,0" />
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="4" Background="#1D2025" BorderBrush="#303640" BorderThickness="1"
+                CornerRadius="6" Padding="10">
+            <TextBlock Text="{x:Static local:UiText.SessionSecurityNotice}" FontSize="9.5"
+                       Foreground="#959BA5" TextWrapping="Wrap" />
+        </Border>
+
+        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,14,0,0">
+            <Button Click="OnCancelClick" Content="{x:Static local:UiText.Cancel}"
+                    MinWidth="72" Padding="10,6" Background="#202329"
+                    BorderBrush="#383D46" Foreground="#B7BCC4" />
+            <Button x:Name="ImportButton" Click="OnImportClick" Content="{x:Static local:UiText.ImportSessionAccount}"
+                    IsEnabled="False" MinWidth="104" Padding="12,6" Margin="8,0,0,0"
+                    Background="#2C5F9E" BorderBrush="#4679B8" Foreground="#F7F9FC" />
+        </StackPanel>
+    </Grid>
+</Window>

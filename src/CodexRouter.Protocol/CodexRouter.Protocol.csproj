@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>CodexRouter.Protocol</AssemblyName>
+    <RootNamespace>CodexRouter.Protocol</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CodexRouter.Domain\CodexRouter.Domain.csproj" />
+  </ItemGroup>
+</Project>

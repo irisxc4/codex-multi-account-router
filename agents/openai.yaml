@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Multi-Account Router"
+  short_description: "Build and operate the Windows Codex account router"
+  default_prompt: "Use $codex-multi-account-router to safely build, install, or diagnose the multi-account Router without exposing credentials."

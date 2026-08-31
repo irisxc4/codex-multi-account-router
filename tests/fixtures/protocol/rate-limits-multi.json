@@ -1,0 +1,28 @@
+{
+  "id": 8,
+  "result": {
+    "rateLimits": {
+      "primary": { "usedPercent": 99, "windowDurationMins": 300, "resetsAt": 1786845600 },
+      "secondary": null,
+      "planType": "plus"
+    },
+    "rateLimitsByLimitId": {
+      "codex": {
+        "limitId": "codex",
+        "limitName": "Codex",
+        "primary": { "usedPercent": 12, "windowDurationMins": 300, "resetsAt": 1786845600 },
+        "secondary": { "usedPercent": 44, "windowDurationMins": 10080, "resetsAt": 1787443200 },
+        "planType": "plus",
+        "rateLimitReachedType": null
+      },
+      "review": {
+        "limitId": "review",
+        "limitName": "Code Review",
+        "primary": { "usedPercent": 73, "windowDurationMins": 1440, "resetsAt": 1786932000 },
+        "secondary": null,
+        "spendControlReached": true,
+        "rateLimitReachedType": "workspace_member_usage_limit_reached"
+      }
+    }
+  }
+}

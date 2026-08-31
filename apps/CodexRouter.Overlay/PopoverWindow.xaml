@@ -1,0 +1,301 @@
+<Window x:Class="CodexRouter.Overlay.PopoverWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:CodexRouter.Overlay"
+        Width="372" MaxHeight="610" SizeToContent="Height"
+        WindowStyle="None" ResizeMode="NoResize"
+        AllowsTransparency="True" Background="Transparent"
+        ShowInTaskbar="False" Topmost="True">
+    <Border Background="#FA17191E"
+            BorderBrush="#454A54"
+            BorderThickness="1"
+            CornerRadius="14"
+            Padding="14">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="2,0,2,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="6" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="{x:Static local:UiText.RouterName}" FontSize="15" FontWeight="SemiBold" />
+                    <TextBlock Text="{Binding StatusText}" FontSize="10.5"
+                               Foreground="#9297A1" Margin="0,3,0,0"
+                               TextWrapping="Wrap" MaxWidth="282" />
+                </StackPanel>
+                <Border Grid.Column="1" Background="#262A31" BorderBrush="#3C414A"
+                        BorderThickness="1" CornerRadius="7" Padding="8,4"
+                        VerticalAlignment="Center">
+                    <TextBlock Text="{Binding ModeText}" FontSize="9.5" FontWeight="SemiBold"
+                               Foreground="#C7CBD2" />
+                </Border>
+                <Button Grid.Column="3"
+                        Style="{StaticResource HeaderExitButton}"
+                        Click="OnExitClick"
+                        ToolTip="{x:Static local:UiText.ExitApplication}"
+                        AutomationProperties.Name="{x:Static local:UiText.ExitApplication}">
+                    <StackPanel Orientation="Horizontal">
+                        <Path Width="13" Height="13"
+                              Data="M 7,1 L 7,7 M 3.6,3.6 A 5,5 0 1 0 10.4,3.6"
+                              Stroke="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"
+                              StrokeThickness="1.6"
+                              StrokeStartLineCap="Round"
+                              StrokeEndLineCap="Round"
+                              Stretch="Uniform"
+                              Margin="0,0,5,0" />
+                        <TextBlock Text="{x:Static local:UiText.ExitApplication}"
+                                   FontSize="10.5"
+                                   FontWeight="SemiBold"
+                                   Foreground="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+
+            <Border Grid.Row="1" BorderBrush="#30343C" BorderThickness="0,1,0,1"
+                    Padding="0,10" Margin="0,0,0,10">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Visibility" Value="Visible" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HasAccounts}" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <ScrollViewer MaxHeight="365" VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled">
+                    <ItemsControl ItemsSource="{Binding Accounts}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="6" />
+                                        <ColumnDefinition Width="30" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Grid.Column="0" Style="{StaticResource FlatButton}"
+                                            Tag="{Binding Id}"
+                                            Click="OnAccountClick"
+                                            ToolTip="{x:Static local:UiText.AccountClickToolTip}"
+                                            AutomationProperties.Name="{Binding Alias}"
+                                            HorizontalContentAlignment="Stretch"
+                                            Padding="10,9">
+                                        <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Ellipse Width="6" Height="6" Fill="#A8ADB6"
+                                                         VerticalAlignment="Center" Margin="0,0,7,0" />
+                                                <TextBlock Text="{Binding Alias}" FontSize="12.5"
+                                                           FontWeight="SemiBold" />
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                                <TextBlock Text="{x:Static local:UiText.Current}" FontSize="8.5" Foreground="#9CA3AF"
+                                                           Margin="0,0,7,0">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsCurrent}" Value="True">
+                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+                                                <TextBlock Text="{x:Static local:UiText.Pin}" FontSize="8.5" Foreground="#D7D9DE">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsPinned}" Value="True">
+                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <TextBlock Grid.Row="1" Text="{Binding Detail}" FontSize="9.5"
+                                                   Foreground="#8D929C" Margin="13,3,0,7"
+                                                   TextTrimming="CharacterEllipsis" />
+
+                                        <Grid Grid.Row="2" Margin="13,0,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="12" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding ShortQuota}" FontSize="9.5"
+                                                           Foreground="#B6BAC2" />
+                                                <ProgressBar Minimum="0" Maximum="100" Value="{Binding ShortUsed, Mode=OneWay}"
+                                                             Height="3" Margin="0,4,0,0"
+                                                             Foreground="#AEB4BF" Background="#343841"
+                                                             BorderThickness="0">
+                                                    <ProgressBar.Style>
+                                                        <Style TargetType="ProgressBar">
+                                                            <Setter Property="Visibility" Value="Visible" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding HasShortQuota}" Value="False">
+                                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </ProgressBar.Style>
+                                                </ProgressBar>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="2">
+                                                <TextBlock Text="{Binding LongQuota}" FontSize="9.5"
+                                                           Foreground="#B6BAC2" />
+                                                <ProgressBar Minimum="0" Maximum="100" Value="{Binding LongUsed, Mode=OneWay}"
+                                                             Height="3" Margin="0,4,0,0"
+                                                             Foreground="#AEB4BF" Background="#343841"
+                                                             BorderThickness="0">
+                                                    <ProgressBar.Style>
+                                                        <Style TargetType="ProgressBar">
+                                                            <Setter Property="Visibility" Value="Visible" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding HasLongQuota}" Value="False">
+                                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </ProgressBar.Style>
+                                                </ProgressBar>
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <TextBlock Grid.Row="3" Text="{Binding SpecialQuota}"
+                                                   FontSize="8.5" Foreground="#9EA4AE"
+                                                   Margin="13,6,0,0"
+                                                   TextWrapping="Wrap" TextTrimming="CharacterEllipsis">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding HasSpecialQuota}" Value="False">
+                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+
+                                        <TextBlock Grid.Row="4" Text="{Binding QuotaSyncText}"
+                                                   ToolTip="{Binding QuotaErrorText}"
+                                                   FontSize="8" Foreground="#7F8793"
+                                                   Margin="13,5,0,0" />
+                                        </Grid>
+                                    </Button>
+                                    <Button Grid.Column="2" Style="{StaticResource IconButton}"
+                                            Tag="{Binding Id}"
+                                            Click="OnRenameAccountClick"
+                                            ToolTip="{x:Static local:UiText.EditDisplayName}"
+                                            AutomationProperties.Name="{x:Static local:UiText.EditDisplayName}"
+                                            VerticalAlignment="Top">
+                                        <Path Width="13" Height="13"
+                                              Data="M 2,11 L 4.8,10.4 L 11.3,3.9 L 8.1,0.7 L 1.6,7.2 Z M 7.3,1.5 L 10.5,4.7"
+                                              Stroke="#C9CDD5" StrokeThickness="1.35"
+                                              StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                              StrokeLineJoin="Round" Fill="Transparent" Stretch="Uniform" />
+                                    </Button>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Border>
+
+            <Border Grid.Row="1" BorderBrush="#30343C" BorderThickness="0,1,0,1"
+                    Padding="6,18" Margin="0,0,0,10">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HasAccounts}" Value="False">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <StackPanel HorizontalAlignment="Stretch">
+                    <TextBlock Text="{x:Static local:UiText.NoAccountsTitle}" FontSize="13" FontWeight="SemiBold"
+                               HorizontalAlignment="Center" />
+                    <TextBlock Text="{x:Static local:UiText.NoAccountsDescription}"
+                               FontSize="10" Foreground="#9297A1" TextWrapping="Wrap"
+                               TextAlignment="Center" Margin="12,7,12,12" />
+                    <Button x:Name="EmptyAddAccountButton" Style="{StaticResource FlatButton}" Click="OnAddAccountClick"
+                            HorizontalAlignment="Stretch" Padding="12,8"
+                            Content="{x:Static local:UiText.ConnectChatGpt}" />
+                </StackPanel>
+            </Border>
+
+            <Grid Grid.Row="2" Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="8" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="RoutingToggleButton" Grid.Column="0" Style="{StaticResource FlatButton}" Click="OnRoutingToggleClick"
+                        IsEnabled="{Binding HasAccounts}" Content="{Binding RoutingToggleText}"
+                        ToolTip="{x:Static local:UiText.RoutingToggleToolTip}"
+                        AutomationProperties.Name="{x:Static local:UiText.RoutingToggleToolTip}" />
+                <Button x:Name="AddAccountButton" Grid.Column="2" Style="{StaticResource FlatButton}" Click="OnAddAccountClick"
+                        Content="{x:Static local:UiText.AddChatGpt}" />
+            </Grid>
+
+            <StackPanel Grid.Row="3" Margin="0,0,0,10">
+                <TextBlock Text="{x:Static local:UiText.MigrationHint}" FontSize="8.5"
+                           Foreground="#7F8793" Margin="2,0,2,5" TextWrapping="Wrap" />
+                <Button x:Name="MigrationButton" Style="{StaticResource FlatButton}" Click="OnMigrateCurrentClick"
+                        IsEnabled="{Binding HasAccounts}"
+                        HorizontalContentAlignment="Left"
+                        ToolTip="{x:Static local:UiText.MigrationToolTip}"
+                        Content="{x:Static local:UiText.MigrateCurrent}" />
+            </StackPanel>
+
+            <Expander Grid.Row="4" IsExpanded="False" Foreground="#AEB5BF"
+                      BorderBrush="#30343C" BorderThickness="0,1,0,0"
+                      Padding="0,8,0,0">
+                <Expander.Header>
+                    <TextBlock Text="{x:Static local:UiText.AdvancedMaintenance}" FontSize="9.5"
+                               Foreground="#AEB5BF" />
+                </Expander.Header>
+                <StackPanel Margin="0,6,0,0">
+                    <TextBlock Text="{x:Static local:UiText.IntegrationStatus}" FontSize="8.5"
+                               Foreground="#7F8793" Margin="2,0,2,3" />
+                    <TextBlock Text="{Binding IntegrationStatusText}" FontSize="9"
+                               Foreground="#B6BAC2" TextWrapping="Wrap" Margin="2,0,2,7" />
+                    <Button x:Name="IntegrationButton" Style="{StaticResource FlatButton}" Click="OnIntegrationClick"
+                            IsEnabled="{Binding HasAccounts}" HorizontalContentAlignment="Left"
+                            Content="{Binding IntegrationActionText}"
+                            AutomationProperties.Name="{Binding IntegrationActionText}" />
+                </StackPanel>
+            </Expander>
+        </Grid>
+    </Border>
+</Window>

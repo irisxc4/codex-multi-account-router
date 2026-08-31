@@ -1,0 +1,47 @@
+# IDE and build output
+.vs/
+.vscode/
+**/bin/
+**/obj/
+TestResults/
+artifacts/
+publish-*/
+package/
+*.user
+*.suo
+
+# Router runtime data: never commit
+CodexRouter/
+codexrouter-data/
+profiles/
+shared/
+templates/
+sessions/
+archived_sessions/
+logs/
+diagnostics/
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.jsonl
+*.log
+
+# Credentials and local configuration: never commit
+auth.json
+**/auth.json
+secrets/
+*.age
+*.key
+*.pem
+*.pfx
+*.p12
+.env
+.env.*
+!.env.example
+
+# Local/private work products
+.learnings/
+nul
+*.zip
+*.7z

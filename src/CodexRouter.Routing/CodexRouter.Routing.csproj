@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>CodexRouter.Routing</RootNamespace>
+    <AssemblyName>CodexRouter.Routing</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CodexRouter.Domain\CodexRouter.Domain.csproj" />
+    <ProjectReference Include="..\CodexRouter.Storage\CodexRouter.Storage.csproj" />
+    <ProjectReference Include="..\CodexRouter.Workers\CodexRouter.Workers.csproj" />
+  </ItemGroup>
+</Project>

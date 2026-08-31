@@ -1,0 +1,38 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 7.0.x
+
+      - name: Public secret scan
+        shell: pwsh
+        run: .\scripts\public-secret-scan.ps1
+
+      - name: Restore
+        shell: pwsh
+        run: dotnet restore .\CodexRouter.sln
+
+      - name: Build and test all assemblies
+        shell: pwsh
+        run: .\scripts\test-all.ps1
+
+      - name: Audit NuGet vulnerabilities
+        shell: pwsh
+        run: |
+          $output = dotnet list .\CodexRouter.sln package --vulnerable --include-transitive
+          $output
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          if (($output -join "`n") -match 'has the following vulnerable packages') { exit 1 }

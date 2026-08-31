@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>CodexRouterSetup</AssemblyName>
+    <RootNamespace>CodexRouter.Setup</RootNamespace>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <SelfContained>false</SelfContained>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\CodexRouter.Maintenance\CodexRouter.Maintenance.csproj" />
+    <ProjectReference Include="..\..\src\CodexRouter.Host\CodexRouter.Host.csproj" />
+    <ProjectReference Include="..\..\src\CodexRouter.Workers\CodexRouter.Workers.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(EmbeddedPackageZip)' != ''">
+    <EmbeddedResource Include="$(EmbeddedPackageZip)" LogicalName="CodexRouter.Setup.package.zip" />
+  </ItemGroup>
+</Project>

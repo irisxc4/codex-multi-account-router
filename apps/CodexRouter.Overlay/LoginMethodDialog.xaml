@@ -1,0 +1,94 @@
+<Window x:Class="CodexRouter.Overlay.LoginMethodDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:CodexRouter.Overlay"
+        Title="{x:Static local:UiText.LoginMethodTitle}"
+        Width="410" SizeToContent="Height" MaxHeight="520"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="#17191E"
+        Foreground="#E7E9ED"
+        ShowInTaskbar="False">
+    <Grid Margin="18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="{x:Static local:UiText.LoginMethodTitle}"
+                   FontSize="16" FontWeight="SemiBold" />
+        <TextBlock Grid.Row="1" Text="{x:Static local:UiText.LoginMethodDescription}"
+                   FontSize="10.5" Foreground="#969CA6" TextWrapping="Wrap"
+                   Margin="0,6,0,14" />
+
+        <Border x:Name="ProxyPanel" Grid.Row="2" Visibility="Collapsed"
+                Background="#20242A" BorderBrush="#3D4652" BorderThickness="1"
+                CornerRadius="7" Padding="10" Margin="0,0,0,12">
+            <StackPanel>
+                <TextBlock Text="{x:Static local:UiText.LoginNetworkRouteTitle}" FontSize="10.5"
+                           FontWeight="SemiBold" Foreground="#D8DBE1" Margin="0,0,0,7" />
+                <RadioButton x:Name="DirectRouteRadioButton" GroupName="LoginRoute"
+                             Checked="OnRouteSelected" Foreground="#D6D9DF" Margin="0,0,0,5"
+                             Content="{x:Static local:UiText.DirectLoginRoute}" />
+                <RadioButton x:Name="ProxyRouteRadioButton" GroupName="LoginRoute"
+                             Checked="OnRouteSelected" Foreground="#E7E9ED">
+                    <TextBlock x:Name="ProxyCandidateText" FontSize="11" FontWeight="SemiBold" />
+                </RadioButton>
+                <TextBlock Text="{x:Static local:UiText.LoginProxyDescription}" FontSize="9.5"
+                           Foreground="#969CA6" TextWrapping="Wrap" Margin="22,5,0,0" />
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="3">
+            <Button x:Name="BrowserLoginButton" Click="OnBrowserClick" HorizontalContentAlignment="Stretch"
+                    Padding="12,11" Margin="0,0,0,9" Background="#2F6FEB"
+                    BorderBrush="#588BF0" Foreground="#FFFFFF">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="34" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Border Width="27" Height="27" CornerRadius="8" Background="#24FFFFFF"
+                            BorderBrush="#45FFFFFF" BorderThickness="1" HorizontalAlignment="Left">
+                        <Path Data="M 5,8 L 5,6 C 5,2.8 11,2.8 11,6 L 11,8 M 3.5,8 L 12.5,8 L 12.5,14.5 L 3.5,14.5 Z"
+                              Stroke="#FFFFFF" StrokeThickness="1.35" StrokeLineJoin="Round"
+                              Width="16" Height="16" Stretch="Uniform" />
+                    </Border>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="{x:Static local:UiText.BrowserLoginTitle}" FontSize="12.5" FontWeight="SemiBold" />
+                        <TextBlock Text="{x:Static local:UiText.BrowserLoginDescription}" FontSize="9.5"
+                                   Foreground="#DDE8FF" TextWrapping="Wrap" Margin="0,3,0,0" />
+                    </StackPanel>
+                </Grid>
+            </Button>
+            <Button x:Name="DeviceLoginButton" Click="OnDeviceClick" HorizontalContentAlignment="Stretch"
+                    Padding="12,10" Background="#22262D"
+                    BorderBrush="#3A3F48" Foreground="#E3E5E9">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="34" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Border Width="27" Height="27" CornerRadius="8" Background="#2A3039"
+                            BorderBrush="#46505D" BorderThickness="1" HorizontalAlignment="Left">
+                        <Path Data="M 5,1.5 L 11,1.5 C 12.1,1.5 13,2.4 13,3.5 L 13,14.5 C 13,15.6 12.1,16.5 11,16.5 L 5,16.5 C 3.9,16.5 3,15.6 3,14.5 L 3,3.5 C 3,2.4 3.9,1.5 5,1.5 Z M 6.5,13.5 L 9.5,13.5"
+                              Stroke="#B9C7D8" StrokeThickness="1.35" StrokeLineJoin="Round"
+                              Width="16" Height="17" Stretch="Uniform" />
+                    </Border>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="{x:Static local:UiText.DeviceLoginTitle}" FontSize="11.5" FontWeight="SemiBold" />
+                        <TextBlock Text="{x:Static local:UiText.DeviceLoginDescription}" FontSize="9.5"
+                                   Foreground="#949AA4" TextWrapping="Wrap" Margin="0,3,0,0" />
+                    </StackPanel>
+                </Grid>
+            </Button>
+        </StackPanel>
+
+        <Button Grid.Row="4" Click="OnCancelClick" Content="{x:Static local:UiText.Cancel}"
+                HorizontalAlignment="Right" MinWidth="72" Padding="10,5" Margin="0,14,0,0"
+                Background="#202329" BorderBrush="#383D46" Foreground="#B7BCC4" />
+    </Grid>
+</Window>
